@@ -99,6 +99,14 @@ class FrameCounter
 
     // Setup the layout
     _resetLayout();
+
+    List<double> test = [
+                          5.0, 10.0, 15.0, 20.0, 25.0, 30.0, 35.0, 40.0, 45.0, 50.0,
+                         55.0, 60.0, 55.0, 50.0, 45.0, 40.0, 35.0, 30.0, 25.0, 20.0,
+                         15.0, 10.0,  5.0, 10.0, 15.0, 20.0, 25.0, 30.0, 35.0, 40.0 ];
+
+    for (double item in test)
+      _setFps(item);
   }
 
   //---------------------------------------------------------------------
@@ -154,6 +162,7 @@ class FrameCounter
    */
   String get font => _font;
   set font(String value) { _font = value; }
+
   /**
    * The color for text rendering.
    */
@@ -201,6 +210,7 @@ class FrameCounter
 
     // Draw the FPS text
     String fpsText = 'FPS: ${fps}';
+    _context.font = _font;
     _context.fillStyle = _fontColor;
     _context.fillText(fpsText, _padding, _padding + _textHeight);
 

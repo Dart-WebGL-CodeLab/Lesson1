@@ -13,7 +13,11 @@ bool onUpdate(int time) { counter.draw(); window.requestAnimationFrame(onUpdate)
 void main()
 {
   counter = new FrameCounter('#frame_counter');
-  print(counter.fps);
+  counter.font = '36px "Lucida Console", Monaco, monospace';
+  counter.canvasWidth = 600;
+  counter.canvasHeight = 300;
+  counter.textHeight = 36.0;
+  //counter.draw();
 
-  //window.requestAnimationFrame(onUpdate);
+  window.requestAnimationFrame(onUpdate);
 }

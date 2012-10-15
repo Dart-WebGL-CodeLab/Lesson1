@@ -36,8 +36,10 @@ class FrameCounter
   // Member variables
   //---------------------------------------------------------------------
 
-  // Insert any additional member variables required here
-
+  /// The number of frames encountered.
+  int _frames;
+  /// The time when the current second has expired.
+  int _endTime;
   /// The number of FPS timings to keep track of.
   int _historySize;
   /// Holds the historic record of FPS over time.
@@ -78,7 +80,9 @@ class FrameCounter
    * [historySize] timings.
    */
   FrameCounter(String id, [int width = _defaultWidth, int height = _defaultHeight, int historySize = _defaultHistorySize])
-    : _historySize = historySize
+    : _frames = 0
+    , _endTime = 0
+    , _historySize = historySize
     , _historicFps = new Queue<double>()
     , _canvasWidth = width
     , _canvasHeight = height
@@ -188,8 +192,17 @@ class FrameCounter
    */
   void update(int time)
   {
-    // Fill it out...
-    // When a new timing has been computed call _setFps
+    _frames++;
+
+    if (time >= _endTime)
+    {
+      double currentFps = (_frames * _msPerSecond) / (_msPerSecond + (time - _endTime));
+      _setFps(currentFps);
+
+      // Reset the values
+      _frames = 0;
+      _endTime = time + _msPerSecond;
+    }
   }
 
   /**
@@ -205,7 +218,7 @@ class FrameCounter
     _context.clearRect(0, 0, _canvasWidth, _canvasHeight);
 
     // Draw the FPS text
-    String fpsText = 'FPS: ${fps}';
+    String fpsText = 'FPS: ${fps.toStringAsFixed(2)}';
     _context.font = _font;
     _context.fillStyle = _fontColor;
     _context.fillText(fpsText, _padding, _padding + _textHeight);

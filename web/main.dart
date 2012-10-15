@@ -1,18 +1,40 @@
+//---------------------------------------------------------------------
+// Library imports
+//
+// Allows libraries to be accessed by the application.
+// Core libraries are prefixed with dart.
+// Third party libraries are specified in the pubspec.yaml file
+// and imported with the package prefix.
+//---------------------------------------------------------------------
+
 #import('dart:html');
 #import('dart:math');
 #import('package:spectre/spectre.dart');
 #import('package:dartvectormath/vector_math_html.dart');
 
+//---------------------------------------------------------------------
+// Source files
+//---------------------------------------------------------------------
+
 #source('application/frame_counter.dart');
 #source('application/game.dart');
 
-FrameCounter counter;
+/// The [FrameCounter] associated with the application
+FrameCounter _counter;
 
-bool onUpdate(int time)
+/**
+ * Update function for the application.
+ *
+ * The current [time] is passed in.
+ */
+bool _onUpdate(int time)
 {
-  counter.update(time);
+  _counter.update(time);
   Game.onUpdate(time);
-  window.requestAnimationFrame(onUpdate);
+
+  // For the animation to continue the function
+  // needs to set itself again
+  window.requestAnimationFrame(_onUpdate);
 }
 
 /**
@@ -21,10 +43,8 @@ bool onUpdate(int time)
 void main()
 {
   Game.onInitialize();
-  counter = new FrameCounter('#frame_counter');//, 600, 300, 120);
-  //counter.font = '36px "Lucida Console", Monaco, monospace';
-  //counter.textHeight = 36.0;
-  //counter.draw();
+  _counter = new FrameCounter('#frame_counter');//, 600, 300, 120);
 
-  window.requestAnimationFrame(onUpdate);
+  // Start the animation loop
+  window.requestAnimationFrame(_onUpdate);
 }

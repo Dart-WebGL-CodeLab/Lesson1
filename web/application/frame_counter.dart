@@ -8,6 +8,7 @@ class FrameCounter
   // Class constants
   //---------------------------------------------------------------------
 
+  static const int _msPerSecond = 1000;
   /// The maximum frames per second to graph.
   static const double _maxFps = 60.0;
   /// The lowest acceptable frame rate
@@ -25,7 +26,7 @@ class FrameCounter
   /// The default font to draw with.
   static const String _defaultFont = '12px "Lucida Console", Monaco, monospace';
   /// The default text color.
-  static const String _defaultFontColor = '#000';
+  static const String _defaultFontColor = '#070707';
   /// The default color for a good frame count
   static const String _defaultGoodFpsColor = '#0F0';
   /// The default color for a bad frame count
@@ -34,6 +35,8 @@ class FrameCounter
   //---------------------------------------------------------------------
   // Member variables
   //---------------------------------------------------------------------
+
+  // Insert any additional member variables required here
 
   /// The number of FPS timings to keep track of.
   int _historySize;
@@ -86,6 +89,9 @@ class FrameCounter
     , _goodFpsColor = _defaultGoodFpsColor
     , _badFpsColor = _defaultBadFpsColor
   {
+    // Don't forget to initialize any additional variables above
+    // in the initializer list or here in the constructor body
+
     assert(_historySize >= 1);
 
     // Get the graphics context
@@ -94,19 +100,8 @@ class FrameCounter
 
     _context = _canvas.context2d;
 
-    // Set the font
-    _context.font = _font;
-
     // Setup the layout
     _resetLayout();
-
-    List<double> test = [
-                          5.0, 10.0, 15.0, 20.0, 25.0, 30.0, 35.0, 40.0, 45.0, 50.0,
-                         55.0, 60.0, 55.0, 50.0, 45.0, 40.0, 35.0, 30.0, 25.0, 20.0,
-                         15.0, 10.0,  5.0, 10.0, 15.0, 20.0, 25.0, 30.0, 35.0, 40.0 ];
-
-    for (double item in test)
-      _setFps(item);
   }
 
   //---------------------------------------------------------------------
@@ -121,8 +116,8 @@ class FrameCounter
   /**
    * The width of the canvas.
    */
-  int get canvasWidth => _canvasWidth;
-  set canvasWidth(int value)
+  int get width => _canvasWidth;
+  set width(int value)
   {
     _canvasWidth = value;
     _resetLayout();
@@ -131,8 +126,8 @@ class FrameCounter
   /**
    * The height of the canvas.
    */
-  int get canvasHeight => _canvasHeight;
-  set canvasHeight(int value)
+  int get height => _canvasHeight;
+  set height(int value)
   {
     _canvasHeight = value;
     _resetLayout();
@@ -188,7 +183,8 @@ class FrameCounter
   /**
    * Updates the [FrameCounter].
    *
-   * This should be called once per frame with the associated [time].
+   * This should be called once per frame with the associated [time]
+   * in milliseconds.
    */
   void update(int time)
   {
@@ -216,7 +212,7 @@ class FrameCounter
 
     // Draw the history
     double fpsOffset = _padding;
-    double barHeightOffset = _padding + _textHeight;
+    double barHeightOffset = _textHeight + (2.0 * _padding);
 
     for (double item in _historicFps)
     {
@@ -248,10 +244,9 @@ class FrameCounter
     _canvas.style.height = '${_canvasHeight}px';
 
     // Compute information for the bars
-    double twicePadding = 2.0 * _padding;
-    double availableWidth = _canvasWidth - twicePadding;
-    _fpsBarWidth = (_canvasWidth - twicePadding) / _historySize;
-    _fpsBarHeight = _canvasHeight - _textHeight - twicePadding;
+    double availableWidth = _canvasWidth - (2.0 * _padding);
+    _fpsBarWidth = availableWidth / _historySize;
+    _fpsBarHeight = _canvasHeight - _textHeight - (3.0 * _padding);
 
     // Force a draw to reset the layout
     draw();

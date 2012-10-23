@@ -7,17 +7,17 @@
 // and imported with the package prefix.
 //---------------------------------------------------------------------
 
-#import('dart:html');
-#import('dart:math');
-#import('package:spectre/spectre.dart');
-#import('package:dartvectormath/vector_math_html.dart');
+import 'dart:html';
+import 'dart:math';
+import 'package:spectre/spectre.dart';
+import 'package:vector_math/vector_math_browser.dart';
 
 //---------------------------------------------------------------------
 // Source files
 //---------------------------------------------------------------------
 
-#source('application/frame_counter.dart');
-#source('application/game.dart');
+part 'application/frame_counter.dart';
+part 'application/game.dart';
 
 /// The [FrameCounter] associated with the application
 FrameCounter _counter;
@@ -27,7 +27,7 @@ FrameCounter _counter;
  *
  * The current [time] is passed in.
  */
-bool _onUpdate(int time)
+void _onUpdate(int time)
 {
   _counter.update(time);
   Game.onUpdate(time);

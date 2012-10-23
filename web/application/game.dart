@@ -13,9 +13,9 @@ class Game
   //---------------------------------------------------------------------
 
   /// Spectre graphics device.
-  Device _graphicsDevice;
+  GraphicsDevice _graphicsDevice;
   /// Immediate rendering context.
-  ImmediateContext _context;
+  GraphicsContext _context;
   /// Handle to the viewport.
   int _viewport;
   /// Clear color for the rendering.
@@ -39,8 +39,8 @@ class Game
     assert(gl != null);
 
     // Setup the Spectre device
-    _graphicsDevice = new Device(gl);
-    _context = _graphicsDevice.immediateContext;
+    _graphicsDevice = new GraphicsDevice(gl);
+    _context = _graphicsDevice.context;
 
     // Create the viewport
     var viewportProperties = {

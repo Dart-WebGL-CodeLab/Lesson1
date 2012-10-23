@@ -29,6 +29,11 @@ class Game
   // Construction
   //---------------------------------------------------------------------
 
+  /**
+   * Creates an instance of the [Game] class.
+   *
+   * The [id] specifies the canvas element to use.
+   */
   Game(String id)
   {
     CanvasElement canvas = document.query(id) as CanvasElement;
@@ -98,12 +103,17 @@ class Game
    */
   void draw()
   {
+    // Clear the buffers
     _context.clearColorBuffer(
       _color.x,
       _color.y,
       _color.z,
       1.0
     );
+    _context.reset();
+    
+    // Set the viewport
+    _context.setViewport(_viewport);
   }
 
   //---------------------------------------------------------------------

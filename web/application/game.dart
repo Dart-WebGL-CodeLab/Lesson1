@@ -43,6 +43,9 @@ class Game
 
     assert(gl != null);
 
+    // Initialize Spectre
+    initSpectre();
+
     // Setup the Spectre device
     _graphicsDevice = new GraphicsDevice(gl);
     _context = _graphicsDevice.context;
@@ -51,12 +54,12 @@ class Game
     var viewportProperties = {
       'x': 0,
       'y': 0,
-      'width': 800,
-      'height': 600
+      'width': canvas.width,
+      'height': canvas.height
     } ;
 
+    // Create the viewport
     _viewport = _graphicsDevice.createViewport('view', viewportProperties);
-    _context.setViewport(_viewport);
 
     // Setup the clear color
     _color = new vec3(0.0, 0.0, 0.0);

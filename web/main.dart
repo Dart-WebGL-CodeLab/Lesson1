@@ -43,7 +43,7 @@ void _onUpdate(double time)
 void main()
 {
   Game.onInitialize();
-  _counter = new FrameCounter('#frame_counter');//, 600, 300, 120);
+  _counter = new FrameCounter('#frame_counter');
 
   // Start the animation loop
   window.requestAnimationFrame(_onUpdate);

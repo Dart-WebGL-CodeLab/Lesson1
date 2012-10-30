@@ -74,7 +74,7 @@ class Game
    * All game logic should be updated within this method.
    * Any animation should be based upon the current [time].
    */
-  void update(int time)
+  void update(double time)
   {
     for (int i = 0; i < 3; ++i)
     {
@@ -111,7 +111,7 @@ class Game
       1.0
     );
     _context.reset();
-    
+
     // Set the viewport
     _context.setViewport(_viewport);
   }
@@ -133,7 +133,7 @@ class Game
    *
    * The current [time] is passed in.
    */
-  static void onUpdate(int time)
+  static void onUpdate(double time)
   {
     _gameInstance.update(time);
     _gameInstance.draw();

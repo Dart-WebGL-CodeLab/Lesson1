@@ -7,6 +7,8 @@
 // and imported with the package prefix.
 //---------------------------------------------------------------------
 
+library webgl_lab;
+
 import 'dart:html';
 import 'dart:math';
 import 'package:spectre/spectre.dart';

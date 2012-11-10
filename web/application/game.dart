@@ -1,3 +1,4 @@
+part of webgl_lab;
 
 class Game
 {

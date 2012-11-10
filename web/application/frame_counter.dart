@@ -195,15 +195,7 @@ class FrameCounter
   {
     _frames++;
 
-    if (time >= _endTime)
-    {
-      double currentFps = (_frames * _msPerSecond) / (_msPerSecond + (time - _endTime));
-      _setFps(currentFps);
-
-      // Reset the values
-      _frames = 0;
-      _endTime = time + _msPerSecond;
-    }
+    // FILL IN HERE
   }
 
   /**

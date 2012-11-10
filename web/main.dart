@@ -25,28 +25,10 @@ part 'application/game.dart';
 FrameCounter _counter;
 
 /**
- * Update function for the application.
- *
- * The current [time] is passed in.
- */
-void _onUpdate(double time)
-{
-  _counter.update(time);
-  Game.onUpdate(time);
-
-  // For the animation to continue the function
-  // needs to set itself again
-  window.requestAnimationFrame(_onUpdate);
-}
-
-/**
  * Main entrypoint for every Dart application.
  */
 void main()
 {
   Game.onInitialize();
   _counter = new FrameCounter('#frame_counter');
-
-  // Start the animation loop
-  window.requestAnimationFrame(_onUpdate);
 }
